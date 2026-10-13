@@ -1,7 +1,20 @@
 
-.script_dir <- "D:/Gene_analysis/test"
-source(file.path(.script_dir, "step_1 define and dictionary.R"))
+
+# ---- Portable project root ----
+# Run from the GitHub repository root.
+
+.script_dir <- normalizePath(
+  Sys.getenv("SEPSIS_PROJECT_ROOT", unset = getwd()),
+  winslash = "/",
+  mustWork = TRUE
+)
+
+source(file.path(
+  .script_dir, "scripts", "step_1 define and dictionary.R"
+))
+
 start_script("step_7 figure2_coverage_and_correlation")
+
 
 fw <- load_framework()
 cv <- read_csv(RE_COVERAGE)
