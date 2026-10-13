@@ -20,7 +20,18 @@ library(edgeR)
 library(readr)
 
 
-CODE_ROOT <- "D:/Gene_analysis/test"
+
+# ---- Project root: portable across computers ----
+# Run R from the root directory of the downloaded GitHub repository.
+
+CODE_ROOT <- normalizePath(
+  Sys.getenv("SEPSIS_PROJECT_ROOT", unset = getwd()),
+  winslash = "/",
+  mustWork = TRUE
+)
+
+cat("Project root:", CODE_ROOT, "\n")
+  
 
 env_or <- function(name, default) {
   v <- Sys.getenv(name, unset = "")
