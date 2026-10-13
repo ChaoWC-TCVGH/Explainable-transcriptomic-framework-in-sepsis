@@ -1,7 +1,19 @@
-.script_dir <- "D:/Gene_analysis/test"
-source(file.path(.script_dir, "step_1 define and dictionary.R"))
+
+# ---- Portable project root ----
+# Run from the GitHub repository root.
+
+.script_dir <- normalizePath(
+  Sys.getenv("SEPSIS_PROJECT_ROOT", unset = getwd()),
+  winslash = "/",
+  mustWork = TRUE
+)
+
+source(file.path(
+  .script_dir, "scripts", "step_1 define and dictionary.R"
+))
 
 start_script("step_11 supplemental_table3_figure2")
+
 
 ax <- load_axis_scores()
 manifest <- read_csv(file.path(TABLE_DIR, "sample_manifest.csv"))
