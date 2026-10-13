@@ -1,6 +1,21 @@
+
 library(readr)
-.script_dir <- "D:/Gene_analysis/test"
-source(file.path(.script_dir, "step_1 define and dictionary.R"))
+
+# ---- Portable project root ----
+# Run this script from the GitHub repository root directory.
+
+.script_dir <- normalizePath(
+  Sys.getenv("SEPSIS_PROJECT_ROOT", unset = getwd()),
+  winslash = "/",
+  mustWork = TRUE
+)
+
+source(file.path(
+  .script_dir,
+  "scripts",
+  "step_1 define and dictionary.R"
+))
+
 
 options(timeout = max(7200, getOption("timeout")))
 man <- read_csv(PUBLIC_MANIFEST_CSV)
