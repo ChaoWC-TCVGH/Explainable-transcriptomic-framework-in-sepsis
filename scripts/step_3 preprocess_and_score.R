@@ -5,10 +5,29 @@ library("AnnotationDbi")
 library("org.Hs.eg.db")
 library("SummarizedExperiment")
 
-.script_dir <- "D:/Gene_analysis/test"
-source(file.path(.script_dir, "step_1 define and dictionary.R"))
-source(file.path(.script_dir, "lib", "scoring.R"))
-source(file.path(.script_dir, "lib", "expression_io.R"))
+
+# ---- Portable project root ----
+# Run this script from the GitHub repository root directory.
+
+.script_dir <- normalizePath(
+  Sys.getenv("SEPSIS_PROJECT_ROOT", unset = getwd()),
+  winslash = "/",
+  mustWork = TRUE
+)
+
+# Load shared definitions and functions
+source(file.path(
+  .script_dir, "scripts", "step_1 define and dictionary.R"
+))
+
+source(file.path(
+  .script_dir, "lib", "scoring.R"
+))
+
+source(file.path(
+  .script_dir, "lib", "expression_io.R"
+))
+
 
 
 dir.create(EXPR_DIR, recursive = TRUE, showWarnings = FALSE)
